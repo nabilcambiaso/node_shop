@@ -1,0 +1,25 @@
+{
+  "name": "rest-shop",
+  "version": "1.0.0",
+  "description": "A nodeJS RESTful api, to build a simple shop API",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "restful",
+    "api"
+  ],
+  "author": "Cambiaso Nabil",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.1",
+    "mongoose": "^6.6.5",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.20"
+  }
+}
