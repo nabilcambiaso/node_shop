@@ -7,17 +7,18 @@ require('dotenv').config();
 
 router.get("/", (req, res, next) => {
   Order.find()
-    .select('_id productId quantity')
+    .select('_id product quantity')
+   .populate('product')
     .exec()
     .then((docs) => {
       console.log(docs);
       res.status(200).json({
         count: docs.length,
-        products: docs.map(doc => {
+        orders: docs.map(doc => {
           return {
             _id: doc._id,
-            name: doc.productId,
-            price: doc.quantity,
+            product: doc.product,
+            quantity: doc.quantity,
             request: {
               type: 'GET',
               url: `${process.env.URL}/orders/${doc._id}`
@@ -33,7 +34,7 @@ router.get("/", (req, res, next) => {
 });
 
 router.post("/", (req, res, next) => {
-  Product.findById(req.body.productId)
+  Product.findById(req.body.product)
     .then((product) => {
       if (product == null) {
         res.status(404).json({
@@ -44,7 +45,7 @@ router.post("/", (req, res, next) => {
       else {
         const order = new Order({
           _id: new mongoose.Types.ObjectId(),
-          productId: req.body.productId,
+          product: req.body.product,
           quantity: req.body.quantity,
         });
         return order.save();
@@ -62,6 +63,7 @@ router.post("/", (req, res, next) => {
 
 router.get("/:orderId", (req, res, next) => {
   Order.findById(req.params.orderId)
+  .populate("product")
   .select('_id productId quantity')
   .exec()
   .then((results)=>{
@@ -71,7 +73,7 @@ router.get("/:orderId", (req, res, next) => {
       order:{
         _id:results._id,
         quantity: results.quantity,
-        productId:results.productId
+        product:results.product
       }
     })
   })
