@@ -11,6 +11,7 @@ const ordersRoutes = require("./api/routes/orders")
 mongoose.connect(`mongodb+srv://nabil:${process.env.MONGODB_PASSWORD}@node-rest-shop.dycyojq.mongodb.net/?retryWrites=true&w=majority`);
 
 app.use(morgan('dev'));
+app.use('/uploads',express.static('uploads'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
