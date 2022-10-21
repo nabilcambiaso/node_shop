@@ -6,7 +6,8 @@ const mongoose = require("mongoose");
 require('dotenv').config();
 
 const productRoutes = require("./api/routes/products");
-const ordersRoutes = require("./api/routes/orders")
+const ordersRoutes = require("./api/routes/orders");
+const userRoutes = require("./api/routes/user");
 
 mongoose.connect(`mongodb+srv://nabil:${process.env.MONGODB_PASSWORD}@node-rest-shop.dycyojq.mongodb.net/?retryWrites=true&w=majority`);
 
@@ -28,6 +29,7 @@ app.use((req, res, next) => {
 //Routes which should handle requests
 app.use("/products", productRoutes);
 app.use("/orders", ordersRoutes);
+app.use("/user", userRoutes);
 
 // Error handling
 app.use((req, res, next)=>{
