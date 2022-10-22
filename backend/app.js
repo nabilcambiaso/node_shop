@@ -11,6 +11,7 @@ const userRoutes = require("./api/routes/user");
 
 mongoose.connect(`mongodb+srv://nabil:${process.env.MONGODB_PASSWORD}@node-rest-shop.dycyojq.mongodb.net/?retryWrites=true&w=majority`);
 
+// morgan to log in our dev environment
 app.use(morgan('dev'));
 app.use('/uploads',express.static('uploads'));
 app.use(bodyParser.urlencoded({extended: false}));
