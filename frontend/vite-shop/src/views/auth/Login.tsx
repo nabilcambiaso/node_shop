@@ -1,44 +1,28 @@
 import React from 'react';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import { connect } from 'react-redux';
 import Logo from '../../assets/images/logo.png';
-function Login() {
+import { loginAction } from '../../logic/redux/actions/auth';
+function Login(props: any) {
 
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
 
-  const handleSubmit = async (email: string, password: String) => {
-    try {
-      await fetch(`http://localhost:5500/user/login`, {
-        method: "post",
-        headers: { "content-Type": "application/json" },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-        });
-    } catch (err) {
-      console.log(err);
-    }
-  }
   const validationSchema = yup.object().shape({
     email: yup.string().email().required(),
     password: yup.string().min(8).required(),
   });
+  
   const initialValues = {
     email: '',
     password: '',
   };
 
-  const onSubmit = (values: any, onSubmitProps: any) => {
-    console.log(values);
-    // onSubmitProps.resetForm();
+  const onSubmit = async (values: any, onSubmitProps: any) => {
+    await props.loginAction(values.email, values.password);
+    onSubmitProps.resetForm();
   };
-
   return (
     <div className="flex min-h-full items-center justify-center py-24 px-12 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8 mt-5">
@@ -54,13 +38,13 @@ function Login() {
           validateOnMount
           onSubmit={onSubmit}
         >
-          {({ handleBlur, handleChange, handleSubmit, isValid,errors,touched, values }) => {
+          {({ handleBlur, handleChange, handleSubmit, isValid, errors, touched, values }) => {
             const handleData = { handleBlur, handleChange, values };
             return (
               <form className="mt-8 space-y-6"
               //  action="#"
-                // method="POST"
-                >
+              // method="POST"
+              >
                 <input type="hidden" name="remember" value="true" />
                 <div className="-space-y-px rounded-md shadow-sm">
                   <div>
@@ -91,8 +75,8 @@ function Login() {
                   </div>
 
                 </div>
-                <p className='text-red-300'> {errors.password && !errors.email && touched.password && errors.password}</p> 
-                <p className='text-red-300'> {errors.email && !errors.password && touched.email && errors.email}</p> 
+                <p className='text-red-300'> {errors.password && !errors.email && touched.password && errors.password}</p>
+                <p className='text-red-300'> {errors.email && !errors.password && touched.email && errors.email}</p>
 
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
@@ -106,7 +90,7 @@ function Login() {
                 </div>
 
                 <div>
-                  <button type="button" onClick={()=>{handleSubmit()}} className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                  <button type="button" onClick={() => { handleSubmit() }} className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                     <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                       <svg className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                         <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd" />
@@ -121,7 +105,18 @@ function Login() {
         </Formik>
       </div>
     </div>
-  )
+  );
 }
 
-export default Login;
+const mapStatetoProps = (state: any) => {
+  return {
+    loginState: state.authReducer,
+  }
+}
+const mapDispatchtoProps = (dispatch: any) => {
+  return {
+    loginAction: (email: string, password: string) => dispatch(loginAction(email, password)),
+
+  }
+}
+export default connect(mapStatetoProps, mapDispatchtoProps)(Login);
