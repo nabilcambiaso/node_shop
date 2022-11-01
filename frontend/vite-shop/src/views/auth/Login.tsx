@@ -7,6 +7,7 @@ import { loginAction } from '../../logic/redux/actions/auth';
 function Login(props: any) {
 
   const [show, setShow] = React.useState(false);
+  const [error, setError] = React.useState('');
   const handleClick = () => setShow(!show);
 
   const validationSchema = yup.object().shape({
@@ -18,10 +19,19 @@ function Login(props: any) {
     email: '',
     password: '',
   };
-
+console.log(props.loginState);
   const onSubmit = async (values: any, onSubmitProps: any) => {
-    await props.loginAction(values.email, values.password);
-    onSubmitProps.resetForm();
+   await props.loginAction(values.email, values.password, (res:any)=>{
+       if(res)
+       {
+        setError('');
+        onSubmitProps.resetForm();
+       }
+       else{
+           setError("Email or password inconrrect");
+       }
+
+   })
   };
   return (
     <div className="flex min-h-full items-center justify-center py-24 px-12 sm:px-6 lg:px-8">
@@ -98,7 +108,11 @@ function Login(props: any) {
                     </span>
                     Sign in
                   </button>
+                  <p  className="font-medium text-red-600 hover:text-red-300">{error}</p>
+
                 </div>
+             
+                  
               </form>
             );
           }}
@@ -115,7 +129,7 @@ const mapStatetoProps = (state: any) => {
 }
 const mapDispatchtoProps = (dispatch: any) => {
   return {
-    loginAction: (email: string, password: string) => dispatch(loginAction(email, password)),
+    loginAction: (email: string, password: string, callback: Function) => dispatch(loginAction(email, password, callback)),
 
   }
 }

@@ -2,17 +2,18 @@ import { SET_LOGIN } from "../types";
 
 const initialState = {
   email:'',
-  password:'',
+  token:'',
 };
 
 export default function (state = initialState, action:any) {
   const { type, payload } = action;
+  console.log("payload",payload)
   switch (type) {
     case SET_LOGIN:
       return {
         ...state,
         email: payload.email,
-        password: payload.password,
+        token: payload.token,
       };
 
     default:

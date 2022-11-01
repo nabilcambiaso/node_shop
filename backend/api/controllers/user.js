@@ -59,6 +59,7 @@ exports.login = (req, res, next) => {
     .then((user) => {
       if (user.length === 0) {
         return res.status(401).json({
+          success: false,
           message: "Auth failed",
         });
       } else {
@@ -68,6 +69,7 @@ exports.login = (req, res, next) => {
           function (err, result) {
             if (err) {
               return res.status(401).json({
+                success: false,
                 message: "Auth infos incorrect",
               });
             }
@@ -83,12 +85,15 @@ exports.login = (req, res, next) => {
                 }
               );
 
-              return res.status(401).json({
+              return res.status(200).json({
+                success: true,
                 message: "Auth successful",
+                email: req.body.email,
                 token
               });
             }
             return res.status(401).json({
+              success: false,
               message: "Auth failed",
             });
           }
