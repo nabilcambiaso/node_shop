@@ -2,7 +2,7 @@ import {Route, Routes} from 'react-router-dom';
 import AppLayout from  './layouts/App';
 import AuthLayout from  './layouts/Auth';
 import Login from './views/auth/Login';
-import Home from './views/Home';
+import LandingPage from './views/public/LandingPage';
 import './index.css';
 function App() {
 
@@ -10,7 +10,7 @@ function App() {
   <>
    <Routes>
         <Route path='/' element={<AppLayout />} >
-          <Route index element={<Home />} />
+          <Route index element={<LandingPage />} />
         </Route>
         <Route path='/auth' element={<AuthLayout />} >
           <Route index element={<Login />} />

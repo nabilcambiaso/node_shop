@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.nav {
+  @apply absolute right-0 top-20 w-1/2 bg-gray-700 text-white items-center  flex-col h-screen md:flex-row  md:relative md:top-0 md:flex  md:w-auto md:h-fit
+}
