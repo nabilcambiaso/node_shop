@@ -1,70 +1,73 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
+import pic1 from '../../assets/images/pic1.jpg';
+import pic2 from '../../assets/images/pic2.jpg';
+import pic3 from '../../assets/images/pic3.jpg';
 
 function LandingPage() {
-  const [menuActive, setMenuActive] = useState(false);
   return (
-    <div className='bg-gray-600 w-full h-screen'>
-      <div className='bg-gray-700 h-20 px-10 flex items-center relative'>
-        <nav className='flex w-full items-center justify-between'>
-          <div>
-            <h1 className=' text-orange-400 text-3xl'>
-              <a href="/">Shop title</a>
-            </h1>
-          </div>
-          <ul className={`nav ${menuActive ? 'flex' : 'hidden'}`}>
-            <li className='ml-4'>
-              <a href="#">
-                <span>Home</span>
-              </a>
-            </li>
-            <li className='ml-4'>
-              <a href="#">
-                <span>Products</span>
-              </a>
-            </li>
-            <li className='ml-4'>
-              <a href="#">
-                <span>Contact</span>
-              </a>
-            </li>
-            <li className='ml-4'>
-              <a href="#">
-                <span>Login</span>
-              </a>
-            </li>
-            <li className='ml-4'>
-              <a href="#">
-                <span>Sign Up</span>
-              </a>
-            </li>
-          </ul>
-          <svg onClick={()=>{setMenuActive(prev=>!prev)}} className="w-6 h-6 flex md:hidden cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
-        </nav>
-      </div>
+    <div>
       <main>
         <header>
-          <h2>Misceallaneous</h2>
-          <h3>For You</h3>
+          <h2 className=' text-4xl m-5 text-gray-50'>Misceallaneous</h2>
         </header>
-
-        <div>
-          <h4>Latest Products</h4>
-          <div>
-            {/* card here */}
-            <div>
-              <img src="" alt="" />
-              <div>
-                <span>card title</span>
-                <span>card subtitle here</span>
+        <section className="mx-auto max-w-6xl py-12">
+          <div className="flex flex-col">
+            <div className="flex flex-col md:flex-row justify-center items-center">
+              <div className="transition-all ease-in-out duration-1000 flex flex-col justify-center"></div>
+              <div className="transition-all ease-in-out duration-1000 flex flex-col justify-center"></div>
+              <div className="transition-all ease-in-out duration-1000 flex flex-col justify-center"></div>
+            </div>
+            <div className="flex flex-col md:flex-row justify-center items-center">
+              <div className="transition-all ease-in-out duration-1000 flex flex-col justify-center">
+                <div slot="middle-left" className="max-w-2xl">
+                  <div className="flex flex-row">
+                    <div className="w-2/3 bg-orange-500 p-5 text-teal-100 flex justify-center items-center h-48 text-3xl font-black uppercase">Awesome products delivered</div>
+                    <div className="w-1/3 bg-gray-700 text-orange-100 p-5 flex justify-center items-center">More details about the study can be found in the book , click to learn more ...</div>
+                  </div>
+                </div>
+              </div>
+              <div className="transition-all ease-in-out duration-1000 flex flex-col justify-center"></div>
+              <div className="transition-all ease-in-out duration-1000 flex flex-col justify-center">
+                <div slot="middle-right" className="max-w-xs">
+                  <div className="flex flex-col justify-center h-48 p-3">
+                    <div className="text-xl font-black text-orange-500">Awesome discovery we did</div>
+                    <div className="text-sm text-gray-100 my-3">The results are spectacular, you can checkout the source for more informations</div>
+                    <div className="text-sm text-yellow-600 cursor-pointer">Read more</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              <div className="transition-all ease-in-out duration-1000 flex flex-col items-center md:items-stretch mr-0 md:mr-2">
+                <div slot="bottom-left" className="max-w-lg">
+                  <div className="p-5 shadow-md m-2 mt-4  bg-gray-700"><img className="object-cover h-90 w-90 rounded" src={pic3} alt="step3"/>
+                    <div className="text-xs font-bold uppercase text-orange-500 mt-1 mb-2">Blog post</div>
+                    <div className="text-xl font-bold mb-2 text-white">Big case study</div>
+                    <div className="truncate  text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id ut vel facilis iste, dicta est minus alias, aliquam, velit nisi quo assumenda porro dignissimos doloremque temporibus eum saepe aspernatur ab.</div>
+                  </div>
+                </div>
+              </div>
+              <div className="transition-all  ease-in-out duration-1000 flex flex-col items-center md:items-stretch  mx-0 md:mx-4">
+                <div slot="bottom-center" className="max-w-lg">
+                  <div className="p-5 shadow-md m-2 mt-4  bg-gray-700"><img className=" object-cover max-h-90 w-90 rounded" src={pic2} alt="step3"/>
+                    <div className="text-xs font-bold uppercase text-orange-500 mt-1 mb-2">Blog post</div>
+                    <div className="text-xl font-bold mb-2 text-white">Big case study</div>
+                    <div className="truncate  text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id ut vel facilis iste, dicta est minus alias, aliquam, velit nisi quo assumenda porro dignissimos doloremque temporibus eum saepe aspernatur ab.</div>
+                  </div>
+                </div>
+              </div>
+              <div className="transition-all ease-in-out duration-1000 flex flex-col items-center md:items-stretch  ml-0 md:ml-2">
+                <div slot="bottom-right" className="max-w-lg">
+                  <div className="p-5 shadow-md m-2 mt-4  bg-gray-700"><img className="object-cover max-h-90 w-90 rounded" src={pic1} alt="camera"/>
+                    <div className="text-xs font-bold uppercase text-orange-500 mt-1 mb-2">Blog post</div>
+                    <div className="text-xl font-bold mb-2 text-white">Big case study</div>
+                    <div className="truncate text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id ut vel facilis iste, dicta est minus alias, aliquam, velit nisi quo assumenda porro dignissimos doloremque temporibus eum saepe aspernatur ab.</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-
-          <h4>Most popular Products</h4>
-            <div></div>
-
-            <div>Load more...</div>
-        </div>
+        </section>
       </main>
     </div>
   )
